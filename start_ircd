@@ -1,0 +1,4 @@
+#!/bin/sh
+# basic start script for mintircd
+
+python2 mintircd --motd=motd.txt --logdir=./ > /dev/null &
