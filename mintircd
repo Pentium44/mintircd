@@ -27,7 +27,10 @@
 
 VERSION = "0.4.1"
 
-serverowner = "MultiServ"
+# Change these when needed!
+serverowner = "MultiServ" # This doesn't need to be changed unless you
+                        # to change the service user name
+serverhostname = "hostname"
 
 import os
 import re
@@ -148,7 +151,7 @@ class Client(object):
         if not self.__sent_ping and self.__timestamp + 180 < now:
             if self.__handle_command == self.__command_handler:
                 # Registered.
-                self.message("PING :%s" % self.server.name)
+                self.message("PING :%s" % serverhostname)
                 self.__sent_ping = True
             else:
                 # Not registered.
@@ -219,11 +222,11 @@ class Client(object):
         if self.nickname and self.user:
             self.reply("001 %s :Hi, welcome to IRC" % self.nickname)
             self.reply("002 %s :Your host is %s, running version MintIRCd-%s"
-                       % (self.nickname, server.name, VERSION))
+                       % (self.nickname, serverhostname, VERSION))
             self.reply("003 %s :This server was created sometime"
                        % self.nickname)
             self.reply("004 %s :%s MintIRCd-%s o o"
-                       % (self.nickname, server.name, VERSION))
+                       % (self.nickname, serverhostname, VERSION))
             self.send_lusers()
             self.send_motd()
             self.__handle_command = self.__command_handler
@@ -476,7 +479,7 @@ class Client(object):
             if len(arguments) < 1:
                 self.reply("409 %s :No origin specified" % self.nickname)
                 return
-            self.reply("PONG %s :%s" % (server.name, arguments[0]))
+            self.reply("PONG %s :%s" % (serverhostname, arguments[0]))
 
         def pong_handler():
             pass
@@ -533,7 +536,7 @@ class Client(object):
                 for member in channel.members:
                     self.reply("352 %s %s %s %s %s %s H :0 %s"
                                % (self.nickname, targetname, member.user,
-                                  member.host, server.name, member.nickname,
+                                  member.host, serverhostname, member.nickname,
                                   member.realname))
                 self.reply("315 %s %s :End of WHO list"
                            % (self.nickname, targetname))
@@ -548,8 +551,8 @@ class Client(object):
                            % (self.nickname, user.nickname, user.user,
                               user.host, user.realname))
                 self.reply("312 %s %s %s :%s"
-                           % (self.nickname, user.nickname, server.name,
-                              server.name))
+                           % (self.nickname, user.nickname, serverhostname,
+                              serverhostname))
                 self.reply("319 %s %s :%s"
                            % (self.nickname, user.nickname,
                               " ".join(user.channels)))
@@ -627,7 +630,7 @@ class Client(object):
         self.__writebuffer += msg + "\r\n"
 
     def reply(self, msg):
-        self.message(":%s %s" % (self.server.name, msg))
+        self.message(":%s %s" % (serverhostname, msg))
 
     def reply_403(self, channel):
         self.reply("403 %s %s :No such channel" % (self.nickname, channel))
@@ -675,7 +678,7 @@ class Client(object):
         motdlines = server.get_motd_lines()
         if motdlines:
             self.reply("375 %s :- %s Message of the day -"
-                       % (self.nickname, server.name))
+                       % (self.nickname, serverhostname))
             for line in motdlines:
                 self.reply("372 %s :- %s" % (self.nickname, line.rstrip()))
             self.reply("376 %s :End of /MOTD command" % self.nickname)

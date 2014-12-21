@@ -105,16 +105,6 @@ char *process_string(char *in, int n) {
 						}
 					}
 					
-					if(strncmp(msg, "@die", 4)==0) {
-						if(strncmp(name, owner, strlen(owner))==0) {
-							sprintf(b,"QUIT :Died\r\n");
-							return b;
-						} else {
-							sprintf(b,"PRIVMSG %s :You are not my owner, you cannot kill me.\r\n", name);
-							return b;
-						}
-					}
-					
 					/*if(strncmp(msg, "@topic", 4)==0) {
 						if(strncmp(name, owner, strlen(owner))==0) {
 							(void)set_topic(e, topic, "./channels.log");
@@ -127,7 +117,13 @@ char *process_string(char *in, int n) {
 					}*/
 					
 					if(strncmp(msg, "@help", 5)==0) {
-						sprintf(b,"PRIVMSG %s :---HELP---\r\nPRIVMSG %s :@register <password> - Register your username\r\nPRIVMSG %s :@claim <channel> <user password> - Register IRC channel to your nickname\r\nPRIVMSG %s :@release <nickname> <user password> - Release your nickname if someone else logs on with it.\r\nPRIVMSG %s :@topic <channel> \"<channel topic>\" <user password> - Set your channel topic if you own the channel.\r\n", name, name, name, name, name);
+						sprintf(b,"PRIVMSG %s :---HELP---\r\n\
+									PRIVMSG %s :@register <password> - Register your username\r\n\
+									PRIVMSG %s :@login <password> - Login to services\r\n\
+									PRIVMSG %s :@claim <channel> <user password> - Register IRC channel to your nickname\r\n\
+									PRIVMSG %s :@release <nickname> <user password> - Release your nickname if someone else logs on with it.\r\n\
+									PRIVMSG %s :@topic <channel> \"<channel topic>\" <user password> - Set your channel topic if you own the channel.\r\n", 
+									name, name, name, name, name);
 						return b;
 					}
 					
