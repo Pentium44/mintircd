@@ -1,7 +1,7 @@
-# Make Seebot
+# Make Seebot Services
 
 CC=gcc
-EXECUTABLE=bot
+EXECUTABLE=services
 OBJECTS=irc.o functions.o main.o
 FLAGS=-Wall
 
@@ -11,4 +11,4 @@ main: $(OBJECTS)
 	$(CC) $(OBJECTS) -o $(EXECUTABLE) $(FLAGS)
 	
 clean:
-	rm *o bot
+	rm *o $(EXECUTABLE)

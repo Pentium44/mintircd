@@ -1,4 +1,13 @@
 #!/bin/sh
 # basic start script for mintircd
 
+# Your username, you'll control the IRC services
+YOURUSER="user"
+
 python2 mintircd --motd=motd.txt --logdir=./ > /dev/null &
+
+# Now start the services
+sleep 1
+
+cd services
+./services localhost 6667 MultiServ $YOURUSER

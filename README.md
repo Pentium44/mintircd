@@ -1,8 +1,8 @@
 MintIRCd
 ========
 
-DESCRIPTION: A basic IRC daemon based from miniircd which includes new 
-features like standalone services.
+A basic IRC daemon based from miniircd which includes new features like 
+standalone services.
 
 NOTE: Basic protocol for the IRC backside between clients are as 
 follows. IRC protocol between the IRC services are not, as it is more of 
@@ -13,10 +13,23 @@ Plans
 * Server linking
 * Channel Operator
 
-Additional Features
+Additional features
 -------------------
 * Services (Standalone)
 * Fixed bugs within timeout
+
+Compiling and starting
+----------------------
+First off, you need to compile the services.
+
+    # cd services
+    # make
+
+Then you can start the server along with the services using start_ircd.
+Make sure you edit the variables in the start script!
+
+    # cd ..
+    # ./start_ircd
 
 Licensing
 ---------
