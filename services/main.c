@@ -117,17 +117,19 @@ char *process_string(char *in, int n) {
 					}*/
 					
 					if(strncmp(msg, "@help", 5)==0) {
+						memset(b,0,sizeof(b));
 						sprintf(b,"PRIVMSG %s :---HELP---\r\n" \
 									"PRIVMSG %s :@register <password> - Register your username\r\n" \
 									"PRIVMSG %s :@login <password> - Login to services\r\n" \
 									"PRIVMSG %s :@claim <channel> <user password> - Register IRC channel to your nickname\r\n" \
 									"PRIVMSG %s :@release <nickname> <user password> - Release your nickname if someone else logs on with it.\r\n" \
 									"PRIVMSG %s :@topic <channel> \"<channel topic>\" <user password> - Set your channel topic if you own the channel.\r\n", 
-									name, name, name, name, name);
+									name, name, name, name, name, name);
 						return b;
 					}
 					
 					if(strncmp(msg, "@topic", 6)==0) {
+						memset(b,0,sizeof(b));
 						topicchan = strchr(msg, ' ');
 						if(!topicchan) {
 							sprintf(b,"PRIVMSG %s :You must provide a channel!.\r\n", name);
@@ -203,6 +205,7 @@ char *process_string(char *in, int n) {
 					}
 					
 					if(strncmp(msg, "@release", 8)==0) {
+						memset(b,0,sizeof(b));
 						e = strchr(msg, ' ');
 						if(!e) {
 							sprintf(b,"PRIVMSG %s :You must provide a username.\r\n", name);
@@ -239,7 +242,7 @@ char *process_string(char *in, int n) {
 					}
 					
 					if(strncmp(msg, "@claim", 6)==0) {
-						
+						memset(b,0,sizeof(b));
 						e = strchr(msg, ' ');
 						if(!e)
 							return nothing;
@@ -272,7 +275,7 @@ char *process_string(char *in, int n) {
 					}
 					
 					if(strncmp(msg, "@login", 6)==0) {
-						
+						memset(b,0,sizeof(b));
 						e = strchr(msg, ' ');
 						if(!e)
 							return nothing;
@@ -293,7 +296,7 @@ char *process_string(char *in, int n) {
 					}
 					
 					if(strncmp(msg, "@register", 9)==0) {
-						
+						memset(b,0,sizeof(b));
 						e = strchr(msg, ' ');
 						if(!e) {
 							sprintf(b,"PRIVMSG %s :You must provide a password.\r\n", name);
