@@ -2,15 +2,15 @@
 #include "irc.h"
 #include "functions.h"
 #include "dictionary.h"
-#define BUF 2048
-#define LINEBUF 512
+#define BUF 36864
+#define LINEBUF 4096
 
 char *owner, *nick;
 
 char *process_string(char *in, int n) {
 	int ii = -1, o, i, e;
 	char *nothing = "0";
-	char *buf = malloc(513);
+	char *buf = malloc(8128);
 	
 	for(i = 0; i < n; i++) {
 
@@ -41,7 +41,7 @@ char *process_string(char *in, int n) {
 				char *topic;
 				char *topicchan;
 				char *msg;
-				char *b = malloc(1024);
+				char *b = malloc(4096);
 
 				name = buf+1;
 				e = strchr(name,'!');
@@ -325,6 +325,7 @@ char *process_string(char *in, int n) {
 				}
 			}
 		}
+
 	} // for loop
 }
 
@@ -376,8 +377,10 @@ int main(int argc, char **argv) {
 			char *str = process_string(in, n);
 			if(strncmp(str, "0", 1)!=0) {
 				irc_send(socketfd, str);
+				fflush(stderr);
 			}
 			if(strncmp(str, "QUIT", 4)==0) {
+				fflush(stderr);
 				break;
 			}
 		} // if(n > 0)

@@ -6,5 +6,6 @@ int rand_int();
 int join_channels(int fd, char *filefd);
 int set_channel_owner(char *owner, const char *channel, char *filefd);
 int check_user_passwd(char *nick, const char *pass, char *filefd);
+int check_channel_owner(char *nick, const char *channel, char *filefd);
 //int set_topic(char *channel, char *topic, char *filefd);
 int register_nick(char *nick, const char *pass, char *filefd);

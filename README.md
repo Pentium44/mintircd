@@ -31,9 +31,17 @@ Make sure you edit the variables in the start script!
     # cd ..
     # ./start_ircd
 
+Changelog
+---------
+* v0.4.1b
+	-Bugfix: SOCKBUFIN value too low. Cause high CPU when too long of a string was parsed.
+* v0.4.1
+	-Added standalone C service linking to python daemon
+	-Added IP cloaking for registered users
+	-Cleaned up code positioning
+
 Licensing
 ---------
-
 MintIRCd is released, as like miniIRCd, under the GNU General 
 Public License version 2 or later.
 
@@ -51,4 +59,3 @@ Contributors to the previous MiniIRCd include
 * Martin Maney
 * Matt Behrens
 * Ron Fritz
-
