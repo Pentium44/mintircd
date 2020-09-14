@@ -101,8 +101,11 @@ char *process_string(char *in, int n) {
 						if(strncmp(msg, searchstr, strlen(searchstr))==0) {
 							sprintf(b,"PRIVMSG %s :%s, %s\r\n",chan,
 								name,dictionary[k].reply);
+							free(searchstr);
 							return b;	
 						}
+						
+						free(searchstr);
 					}
 					
 					/*if(strncmp(msg, "@topic", 4)==0) {
@@ -327,6 +330,9 @@ char *process_string(char *in, int n) {
 		}
 
 	} // for loop
+
+	free(buf); // Free memory allocated with malloc
+
 }
 
 int main(int argc, char **argv) {
@@ -377,10 +383,12 @@ int main(int argc, char **argv) {
 			char *str = process_string(in, n);
 			if(strncmp(str, "0", 1)!=0) {
 				irc_send(socketfd, str);
+				free(str);
 				fflush(stderr);
 			}
 			if(strncmp(str, "QUIT", 4)==0) {
 				fflush(stderr);
+				free(str);
 				break;
 			}
 		} // if(n > 0)

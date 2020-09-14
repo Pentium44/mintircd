@@ -33,6 +33,8 @@ Make sure you edit the variables in the start script!
 
 Changelog
 ---------
+* v0.4.2
+	-Bugfix: Multiple calls to malloc with no memory relief.
 * v0.4.1b
 	-Bugfix: SOCKBUFIN value too low. Cause high CPU when too long of a string was parsed.
 * v0.4.1

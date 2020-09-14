@@ -10,4 +10,5 @@ python2 mintircd --motd=motd.txt --logdir=./ > /dev/null &
 sleep 1
 
 cd services
-./services localhost 6667 MultiServ $YOURUSER
+./services localhost 6667 MultiServ $YOURUSER &
+
